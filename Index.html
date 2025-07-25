@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CapCut Pro Clone</title>
+    <style>
+        /* Modern CapCut-like UI */
+        :root {
+            --primary: #fe2c55;
+            --secondary: #25f4ee;
+            --dark: #121212;
+            --card-bg: rgba(255, 255, 255, 0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--dark);
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        /* Floating navigation bar */
+        .floating-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 10px 20px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .nav-btn.active {
+            color: var(--primary);
+        }
+        
+        /* Home screen layout */
+        .home-container {
+            padding: 20px;
+            padding-bottom: 80px; /* Space for floating nav */
+        }
+        
+        .video-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .video-thumbnail {
+            width: 100%;
+            aspect-ratio: 9/16;
+            object-fit: cover;
+        }
+        
+        .video-info {
+            padding: 10px;
+        }
+        
+        /* Filter panel */
+        .filter-panel {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 15px 0;
+            margin-top: 10px;
+        }
+        
+        .filter-card {
+            flex: 0 0 80px;
+            text-align: center;
+        }
+        
+        .filter-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid transparent;
+        }
+        
+        .filter-card.active .filter-preview {
+            border-color: var(--primary);
+        }
+        
+        .filter-name {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        /* Pre-loaded filter images */
+        .filter-preview.vintage { background: linear-gradient(45deg, #f3d8b0, #e6b980); }
+        .filter-preview.dramatic { background: linear-gradient(45deg, #3a1c71, #d76d77); }
+        .filter-preview.glow { background: linear-gradient(45deg, #ff4d4d, #f9cb28); }
+        .filter-preview.cool { background: linear-gradient(45deg, #0575e6, #00f260); }
+        .filter-preview.warm { background: linear-gradient(45deg, #ff512f, #dd2476); }
+    </style>
+</head>
+<body>
+    <!-- Home Screen Content -->
+    <div class="home-container">
+        <h2>Trending Templates</h2>
+        <div class="video-card">
+            <img src="https://via.placeholder.com/300x500/fe2c55/ffffff?text=TikTok+Template" class="video-thumbnail">
+            <div class="video-info">
+                <h3>Viral Transition</h3>
+                <p>Used 2.4M times</p>
+            </div>
+        </div>
+        
+        <h2>Your Projects</h2>
+        <div class="video-card">
+            <img src="https://via.placeholder.com/300x500/25f4ee/ffffff?text=Your+Video" class="video-thumbnail">
+            <div class="video-info">
+                <h3>Untitled Project</h3>
+                <p>Edited 2 days ago</p>
+            </div>
+        </div>
+        
+        <h2>Filters</h2>
+        <div class="filter-panel">
+            <div class="filter-card active">
+                <div class="filter-preview vintage"></div>
+                <div class="filter-name">Vintage</div>
+            </div>
+            <div class="filter-card">
+                <div class="filter-preview dramatic"></div>
+                <div class="filter-name">Dramatic</div>
+            </div>
+            <div class="filter-card">
+                <div class="filter-preview glow"></div>
+                <div class="filter-name">Glow</div>
+            </div>
+            <div class="filter-card">
+                <div class="filter-preview cool"></div>
+                <div class="filter-name">Cool</div>
+            </div>
+            <div class="filter-card">
+                <div class="filter-preview warm"></div>
+                <div class="filter-name">Warm</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Floating Navigation Bar -->
+    <div class="floating-nav">
+        <button class="nav-btn active">
+            <span>🏠</span>
+            <span>Home</span>
+        </button>
+        <button class="nav-btn">
+            <span>🎬</span>
+            <span>Create</span>
+        </button>
+        <button class="nav-btn">
+            <span>💎</span>
+            <span>Pro</span>
+        </button>
+        <button class="nav-btn">
+            <span>👤</span>
+            <span>Profile</span>
+        </button>
+    </div>
+    
+    <script>
+        // Simple interactivity
+        document.querySelectorAll('.filter-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.filter-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                alert(`Applied ${card.querySelector('.filter-name').textContent} filter`);
+            });
+        });
+        
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
